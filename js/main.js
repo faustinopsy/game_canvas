@@ -6,11 +6,5 @@ ctx.moveTo(100, 50);
 ctx.lineTo(100, 200);
 ctx.stroke();
 
-ctx.beginPath();
-ctx.arc(200, 150, 50, 0,  Math.PI * 2);
-ctx.lineTo(200, 150);
-ctx.lineTo(200, 100);
-ctx.lineTo(200, 200);
-ctx.lineTo(200, 150);
-ctx.lineTo(150, 150);
-ctx.stroke();
+ctx.fillRect(110, 150, 50, 100)
+ctx.fillRect(85, 180, 100, 20)
