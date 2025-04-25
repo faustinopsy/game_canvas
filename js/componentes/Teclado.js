@@ -6,7 +6,6 @@ export default class Teclado{
 
     iniciar(){
         document.addEventListener("keydown", (e) => {
-            console.log(e.key.toLowerCase())
             if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a" ) {
                 this.personagem.andar("esquerda");
             } else if (e.key === "ArrowRight"  || e.key.toLowerCase() === "d") {

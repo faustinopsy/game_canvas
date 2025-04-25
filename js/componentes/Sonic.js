@@ -50,6 +50,8 @@ export default class Sonic {
     }
 
     transformar() {
-        console.log("Transformação!");
+        this.linhaAtual = 24;
+        this.frameAtual = (this.frameAtual + 4) % this.totalFrames;
+        this.desenhar();
     }
 }
