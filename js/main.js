@@ -1,16 +1,6 @@
 import Sonic from './componentes/Sonic.js';
-
+import Teclado from './componentes/Teclado.js';
 const canvas = document.querySelector("#canva");
 const sonic = new Sonic(canvas);
+const teclado = new Teclado(sonic)
 
-document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") {
-        sonic.andar("esquerda");
-    } else if (e.key === "ArrowRight") {
-        sonic.andar("direita");
-    } else if (e.key === "ArrowUp") {
-        sonic.pular();
-    } else if (e.key === " ") {
-        sonic.transformar();
-    }
-});
