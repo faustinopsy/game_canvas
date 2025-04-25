@@ -3,6 +3,9 @@
     padding: 0;
     margin: 0;
 }
+body{
+    background-color: black;
+}
 main{
     display: flex;
     align-items: center;
@@ -12,4 +15,68 @@ main{
     width: 300px;
     height: 300px;
     border: solid green 1px;
+    background-color: white;
+}
+#mobile-controls {
+    display: none;
+}
+@media (max-width: 600px) {
+#mobile-controls {
+    display: flex;
+    position: fixed;
+    left: 50%;
+    bottom: 0px;
+    transform: translateX(-50%);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px solid white;
+    border-radius: 100%;
+    padding: 10px;
+}
+
+#mobile-controls button {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 9px #999;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+#mobile-controls button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#up-button, #left-button, #comprar, #right-button, #down-button{
+    height: 65px;
+    width: 80px;
+    
+}
+#up-button::after {
+    content: '▲';
+    color:black;
+} 
+#down-button::after {
+    content: '▼';
+    color:black;
+} 
+#right-button::after {
+    content: '▶';
+    color:black;
+} 
+#left-button::after {
+    content: '◀';
+    color:black;
+} 
+#comprar::after {
+    content: '☻';
+    color:black;
+} 
+
 }
