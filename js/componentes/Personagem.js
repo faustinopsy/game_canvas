@@ -4,13 +4,13 @@ export default class Personagem {
         this.ctx = canvas.getContext("2d");
 
         this.sprite = new Image();
-        this.sprite.src = "../img/flash.png";
+        this.sprite.src = "../img/sonic.png";
         this.sprite.onload = () => this.desenhar();
 
-        this.larguraFrame = 40;
-        this.alturaFrame = 100;
-        this.totalFrames = 13;
-        this.frameAtual = 2;
+        this.larguraFrame = 50;
+        this.alturaFrame = 50;
+        this.totalFrames = 7;
+        this.frameAtual = 0;
         this.linhaAtual = 1;
         this.posicaoX = 100;
         this.posicaoY = 150;
@@ -30,9 +30,11 @@ export default class Personagem {
 
     andar(direcao) {
         if (direcao === "direita") {
+            this.linhaAtual = 1;
             this.frameAtual = (this.frameAtual + 1) % this.totalFrames;
             this.posicaoX += 10;
         } else if (direcao === "esquerda") {
+            this.linhaAtual = 2;
             this.frameAtual = (this.frameAtual + 1) % this.totalFrames;
             this.posicaoX -= 10;
         }
@@ -48,8 +50,8 @@ export default class Personagem {
     }
 
     transformar() {
-        this.linhaAtual = 24;
-        this.frameAtual = (this.frameAtual + 4) % this.totalFrames;
+        this.linhaAtual = 0;
+        this.frameAtual = 0;
         this.desenhar();
     }
 }
