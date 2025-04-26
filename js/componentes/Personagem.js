@@ -6,7 +6,9 @@ export default class Personagem {
         this.sprite = new Image();
         this.sprite.src = "../img/sonic.png";
         this.sprite.onload = () => this.desenhar();
-
+        this.correndo = false;
+        this.voltando = false;
+        this.onAndar = null;
         this.larguraFrame = 52;
         this.alturaFrame = 50;
         this.totalFrames = 7;
@@ -31,21 +33,28 @@ export default class Personagem {
 
     andar(direcao) {
         if (direcao === "direita") {
+            this.correndo = true;
             this.linhaAtual = 1;
             this.frameAtual = (this.frameAtual + 1) % this.totalFrames;
            // this.posicaoX += 10;
         } else if (direcao === "esquerda") {
+            this.voltando = true;
             this.linhaAtual = 2;
             this.frameAtual = (this.frameAtual + 1) % this.totalFrames;
             //this.posicaoX -= 10;
         }
         //this.desenhar();
+        if (this.onAndar) {
+            this.onAndar();
+        }
     }
 
     parar() {
         this.linhaAtual = 0;
         this.frameAtual = 0;
         this.desenhar();
+        this.correndo = false; 
+        this.voltando = false; 
     }
 
     pular() {
