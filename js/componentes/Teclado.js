@@ -10,6 +10,9 @@ export default class Teclado {
         document.addEventListener("keydown", (e) => {
             this.controleTeclado(e.key);
         });
+        document.addEventListener("keyup", (e) => {
+            this.controleTeclado('x');
+        });
        document.addEventListener("resize", this.verificarDispositivo)
     }
 
@@ -21,7 +24,7 @@ export default class Teclado {
         } else if (tecla === "ArrowUp" || tecla.toLowerCase() === "w") {
             this.personagem.pular();
         } else if (tecla.toLowerCase() === "x") {
-            this.personagem.transformar();
+            this.personagem.parar();
         }
     }
 
