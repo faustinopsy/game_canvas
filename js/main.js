@@ -2,6 +2,7 @@ import Personagem from './componentes/Personagem.js';
 import Teclado from './componentes/Teclado.js';
 import Obstaculo from './componentes/Obstaculo.js';
 import Colisor from './componentes/Colisor.js';
+import Cenario from './componentes/Cenario.js';
 
 const canvas = document.querySelector("#canva");
 const personagem = new Personagem(canvas);
@@ -12,14 +13,26 @@ let obstaculo = new Obstaculo(canvas, personagem);
 
 let jogoAtivo = true;
 let debugColisao = true;
+
+const backgrounds = [
+    '../img/fase1.jpg',
+    '../img/fase2.jpg',
+    '../img/fase3.jpg',
+    '../img/fase4.jpg',
+    '../img/fase5.jpg'
+];
+const cenario = new Cenario(canvas, backgrounds);
+
 function inicia() {
     if (!jogoAtivo) {
         console.log("Fim de jogo!");
         return;
     }
-
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    cenario.atualizar();
+    cenario.desenhar();
 
     if (obstaculo) {
         obstaculo.atualizar();
