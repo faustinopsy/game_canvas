@@ -66,13 +66,17 @@ export default class Personagem {
     parar() {
         this.linhaAtual = 0;
         this.frameAtual = 0;
+        this.posicaoY = 150;
         this.desenhar();
         this.correndo = false; 
         this.voltando = false; 
     }
 
     pular() {
-        console.log("Pulo!");
+        this.correndo = true;
+        this.linhaAtual = 1;
+        this.frameAtual = (this.frameAtual + 1) % this.totalFrames;
+        this.posicaoY = 100;
     }
 
     transformar() {
