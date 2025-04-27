@@ -5,28 +5,42 @@ export default class Personagem {
 
         this.sprite = new Image();
         this.sprite.src = "../img/sonic.png";
-        this.sprite.onload = () => this.desenhar();
         this.correndo = false;
         this.voltando = false;
         this.onAndar = null;
-        this.larguraFrame = 52;
-        this.alturaFrame = 50;
+        this.largura = 52;
+        this.altura = 50;
         this.totalFrames = 7;
         this.frameAtual = 0;
         this.linhaAtual = 0;
         this.posicaoX = 80;
         this.posicaoY = 150;
+
+        this.colisaoOffsetX = 10;
+        this.colisaoOffsetY = 7; 
+        this.colisaoLargura = 25;
+        this.colisaoAltura = 42;  
     }
 
+    desenharCaixaColisao(ctx) {
+        ctx.strokeStyle = 'lime';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(
+            this.posicaoX + this.colisaoOffsetX,
+            this.posicaoY + this.colisaoOffsetY,
+            this.colisaoLargura,
+            this.colisaoAltura
+        );
+    }
     desenhar() {
         const espaço = 0;
         //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        const sx = Math.floor(this.frameAtual) * (this.larguraFrame + espaço);
-        const sy = Math.floor(this.linhaAtual) * this.alturaFrame;
+        const sx = Math.floor(this.frameAtual) * (this.largura + espaço);
+        const sy = Math.floor(this.linhaAtual) * this.altura;
         this.ctx.drawImage(
             this.sprite,
-            sx, sy, this.larguraFrame, this.alturaFrame,
-            this.posicaoX, this.posicaoY, this.larguraFrame, this.alturaFrame
+            sx, sy, this.largura, this.altura,
+            this.posicaoX, this.posicaoY, this.largura, this.altura
         );
         
     }

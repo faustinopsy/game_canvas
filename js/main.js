@@ -1,23 +1,64 @@
 import Personagem from './componentes/Personagem.js';
 import Teclado from './componentes/Teclado.js';
 import Obstaculo from './componentes/Obstaculo.js';
+import Colisor from './componentes/Colisor.js';
 
 const canvas = document.querySelector("#canva");
 const personagem = new Personagem(canvas);
 const teclado = new Teclado(personagem)
+const colisao = new Colisor()
 let obstaculo = new Obstaculo(canvas, personagem);
 
 
+let jogoAtivo = true;
+let debugColisao = true;
 function inicia() {
-    
-    personagem.ctx.clearRect(0, 0, canvas.width, canvas.height);
-    personagem.desenhar();
-    obstaculo.atualizar();
-
-    if (obstaculo.posicaoX + canvas.width < 0) {
-        obstaculo = new Obstaculo(canvas, personagem);
+    if (!jogoAtivo) {
+        console.log("Fim de jogo!");
+        return;
     }
+
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (obstaculo) {
+        obstaculo.atualizar();
+        if (debugColisao) {
+            obstaculo.desenharCaixaColisao(ctx);
+        }
+        if (obstaculo.posicaoX + obstaculo.largura < 0) {
+            console.log("Obstáculo saiu da tela, criando novo.");
+            obstaculo = new Obstaculo(canvas, personagem);
+        }
+    }
+
+    personagem.desenhar();
+    if (debugColisao) {
+        personagem.desenharCaixaColisao(ctx);
+    }
+    if (obstaculo && colisao.verificarColisao(personagem, obstaculo)) {
+        console.log("Colidiu com obstáculo!");
+
+        console.log("Obstáculo 'destruído' (substituído).");
+        obstaculo = new Obstaculo(canvas, personagem);
+
+    }
+
     requestAnimationFrame(inicia);
 }
 
-inicia();
+personagem.sprite.onload = () => {
+    console.log("Sprite carregado, iniciando o jogo.");
+    jogoAtivo = true;
+    obstaculo = new Obstaculo(canvas, personagem); 
+    inicia();
+};
+
+if (personagem.sprite.complete && !personagem.sprite.naturalWidth === 0) {
+  console.log("Sprite já estava carregado (cache), iniciando o jogo.");
+  jogoAtivo = true;
+  obstaculo = new Obstaculo(canvas, personagem);
+  inicia();
+} else {
+     console.log("Aguardando carregamento do sprite...");
+}
