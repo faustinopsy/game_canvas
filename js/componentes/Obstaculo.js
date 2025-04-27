@@ -1,17 +1,28 @@
 export default class Obstaculo {
-    constructor(canvas, personagem, largura = 30, altura = 20) {
+    constructor(canvas, personagem, largura = 30, altura = 60, chaoFase = canvas.height) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.personagem = personagem;
         this.largura = largura;
         this.altura = altura;
         this.posicaoX = canvas.width;
-        this.posicaoY = this.sortearPosicaoY();
-
+        this.chaoFase = chaoFase;
+        this.posicaoY = this.chaoFase - this.altura;
         this.colisaoOffsetX = 0;
         this.colisaoOffsetY = 0;
         this.colisaoLargura = this.largura;
         this.colisaoAltura = this.altura;
+        this.velocidade = 5;
+    }
+
+    atualizar() {
+        this.posicaoX -= this.velocidade;
+        this.desenhar();
+    }
+
+    desenhar() {
+        this.ctx.fillStyle = "red";
+        this.ctx.fillRect(this.posicaoX, this.posicaoY, this.largura, this.altura);
     }
 
     desenharCaixaColisao(ctx) {
@@ -23,25 +34,5 @@ export default class Obstaculo {
             this.colisaoLargura,
             this.colisaoAltura
         );
-    }
-    
-    sortearPosicaoY() {
-        return this.personagem.posicaoY + (Math.random() * 40 - 20); 
-    }
-
-    atualizar() {
-        // if (this.personagem.correndo) { 
-        //     this.posicaoX -= 5;
-        // }
-        // if (this.personagem.voltando) { 
-        //     this.posicaoX += 5;
-        // }
-        this.posicaoX -= 5;
-        this.desenhar();
-    }
-
-    desenhar() {
-        this.ctx.fillStyle = "red";
-        this.ctx.fillRect(this.posicaoX, this.posicaoY, this.largura, this.altura);
     }
 }
