@@ -19,7 +19,9 @@ const backgrounds = [
     '../img/fase2.jpg',
     '../img/fase3.jpg',
     '../img/fase4.jpg',
-    '../img/fase5.jpg'
+    '../img/fase5.jpg',
+    '../img/fase6.jpg',
+    '../img/fase7.jpg'
 ];
 const cenario = new Cenario(canvas, backgrounds);
 
