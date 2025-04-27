@@ -26,7 +26,7 @@ export default class Obstaculo {
     }
     
     sortearPosicaoY() {
-        return this.personagem.posicaoY + (Math.random() * 20 - 10); 
+        return this.personagem.posicaoY + (Math.random() * 40 - 20); 
     }
 
     atualizar() {
