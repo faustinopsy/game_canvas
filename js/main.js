@@ -31,7 +31,7 @@ function inicia() {
             obstaculo = new Obstaculo(canvas, personagem);
         }
     }
-
+    personagem.andar("direita");
     personagem.desenhar();
     if (debugColisao) {
         personagem.desenharCaixaColisao(ctx);

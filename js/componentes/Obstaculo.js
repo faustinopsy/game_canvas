@@ -1,5 +1,5 @@
 export default class Obstaculo {
-    constructor(canvas, personagem, largura = 30, altura = 30) {
+    constructor(canvas, personagem, largura = 30, altura = 20) {
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.personagem = personagem;
@@ -30,12 +30,13 @@ export default class Obstaculo {
     }
 
     atualizar() {
-        if (this.personagem.correndo) { 
-            this.posicaoX -= 5;
-        }
-        if (this.personagem.voltando) { 
-            this.posicaoX += 5;
-        }
+        // if (this.personagem.correndo) { 
+        //     this.posicaoX -= 5;
+        // }
+        // if (this.personagem.voltando) { 
+        //     this.posicaoX += 5;
+        // }
+        this.posicaoX -= 5;
         this.desenhar();
     }
 
