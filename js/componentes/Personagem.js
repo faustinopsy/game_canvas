@@ -5,7 +5,8 @@ export default class Personagem {
         this.sprite = new Image();
         this.sprite.src = "../img/sonic.png";
         this.sprite.onerror = () => console.error("Erro ao carregar sprite:", this.sprite.src);
-        this.vida = 7;
+        this.vidaInicial = 7;
+        this.vida = this.vidaInicial;
         this.largura = 52;
         this.altura = 50;
         this.totalFrames = 7;
@@ -15,6 +16,9 @@ export default class Personagem {
         this.voltando = false;
         this.posicaoX = 80;
         this.posicaoY = 50;
+        this.posicaoXInicial = 80;
+        this.posicaoYInicial = 50;
+
         this.colisaoOffsetX = 10;
         this.colisaoOffsetY = 7;
         this.colisaoLargura = 25;
@@ -71,8 +75,6 @@ export default class Personagem {
         } else if (direcao === "esquerda") {
             this.voltando = true;
             this.correndo = false;
-             if (this.estaNoChao) {
-             }
         }
         if (this.onAndar) { this.onAndar(); }
     }
@@ -100,9 +102,27 @@ export default class Personagem {
     desenharVida(ctx) {
         ctx.fillStyle = 'white';
         ctx.font = '12px Arial';
-        ctx.fillText(`Vida: ${this.vida}`, 10, 60);
+        ctx.textAlign = 'left';
+        ctx.fillText(`Vida: ${this.vida}`, 10, 90);
     }
 
-    transformar() {
+    perderVida() {
+        if (this.vida > 0) {
+            this.vida--;
+            console.log(`Vida restante: ${this.vida}`);
+        }
     }
+
+    resetar() {
+        this.vida = this.vidaInicial;
+        this.posicaoX = this.posicaoXInicial;
+        this.posicaoY = this.posicaoYInicial;
+        this.velocidadeY = 0;
+        this.estaNoChao = false;
+        this.linhaAtual = 0;
+        this.frameAtual = 0;
+        this.correndo = false;
+        this.voltando = false;
+    }
+
 }
